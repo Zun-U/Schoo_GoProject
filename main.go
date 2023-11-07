@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"math/rand"
-	"rand"
 	"time"
 )
 
@@ -57,9 +56,11 @@ func main() {
 		fmt.Println(i)
 	}
 
-	sum := 0;
+	sum := 10;
 	for sum < 1000 {
+		fmt.Println(sum)
 		sum *= sum
+		fmt.Println(sum)
 	}
 
 	// FizzBuzz

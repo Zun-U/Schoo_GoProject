@@ -1,0 +1,3 @@
+module schoo
+
+go 1.21.3
