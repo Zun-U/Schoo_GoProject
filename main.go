@@ -65,7 +65,6 @@ func main() {
 
 	// FizzBuzz
 	for i := 1; i < 21; i++ {
-
 		if i%5 == 0 && i%3 == 0 {
 			fmt.Println("FizzBuzz")
 			continue
@@ -78,9 +77,7 @@ func main() {
 			fmt.Println("Buzz")
 			continue
 		}
-
 		fmt.Println(i)
-
 	}
 
 	rand.New(rand.NewSource(time.Now().UnixNano())) // シード値
@@ -122,7 +119,6 @@ func main() {
 	}
 
 	fmt.Println(slice1)
-
 
 	m := map[string]int{
 		"佐藤":100,
