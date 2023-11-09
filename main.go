@@ -15,7 +15,11 @@ func main() {
 
 }
 
-// Anti Virus SoftによってGoが実行できない場合
+// アンチウィルスによってGoが実行できない場合
 //
 // 「Norton」の場合
-// 「設定」→「スキャンとリスク」で「自動保護....検出から除外する項目」で「AppData\Local」以下の「staticcheck」、「gopls」、「tempファイル」を指定する。
+// 「設定」→「スキャンとリスク」で「自動保護....検出から除外する項目」で「AppData\Local」以下の「staticcheck」、「gopls」、「temp」ファイルを指定する。
+//
+// 参考URL：
+// https://stackoverflow.com/questions/43019581/go-lang-access-denied
+// https://community.norton.com/en/forums/heuradvmlb-has-been-detected-false-positive
