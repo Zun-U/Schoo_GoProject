@@ -8,7 +8,7 @@ import (
 
 func Lesson1Main() {
 
-	fmt.Println("変数、定数、制御構文、配列")
+	fmt.Println("==== Variable, Constant, Control Structure, Array, Slice, Map ====")
 
 	// import
 	fmt.Println(time.Now())
@@ -40,11 +40,11 @@ func Lesson1Main() {
 
 	fmt.Println(s, f, b)
 
-	// 型変換 (浮動小数点型 → 整数型)
+	// キャスト (浮動小数点型 → 整数型)
 	var z int = int(f)
 	fmt.Println(z)
 
-	// 型変換 (整数型 → 浮動小数点型)
+	// キャスト (整数型 → 浮動小数点型)
 	var ff float32 = float32(v) // 整数型に変換される際に小数点以下は切り捨て
 	fmt.Println(ff)
 
@@ -65,8 +65,7 @@ func Lesson1Main() {
 		fmt.Println(xxx)
 	}
 
-	// for文
-	// 以下で成り立つ
+	// for文は以下で成り立つ
 	// 1.「初期設定」
 	// 2.「条件」
 	// 3.「再設定」
@@ -74,8 +73,9 @@ func Lesson1Main() {
 		fmt.Println(i)
 	}
 
-	// 条件のみのfor文
+
 	sum := 10;
+	// 「条件」のみのfor文
 	for sum < 1000 {
 		fmt.Println(sum)
 		sum *= sum
@@ -102,7 +102,7 @@ func Lesson1Main() {
 	rand.New(rand.NewSource(time.Now().UnixNano())) // シード値
 
 	// switch文
-	// ※switch文もブロック内のみで有効な変数を宣言できる。
+	// ※switch文もブロック内のみで有効な変数を宣言できる。(「n := rand.Intn(10);」の部分)
 	switch n := rand.Intn(10); {
 	case n == 0:
 		fmt.Println("少し小さすぎます", n)
