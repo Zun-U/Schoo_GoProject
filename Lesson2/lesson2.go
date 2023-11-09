@@ -92,6 +92,7 @@ func Lesson2Main() {
 
 }
 
+// 関数
 func cube(x int) int {
 	return x * x * x
 }
@@ -100,16 +101,18 @@ func add(x int, y int) int {
 	return x + y
 }
 
+// 引数の型省略
 func sub(x, y int) int {
 	return x -y
 }
 
+// 複数の戻り値
 func split(s string) (string, string) {
 	l := len(s) / 2
 	return s[:l], s[l:]
 }
 
-
+// 可変長引数
 func max(x ...int) int {
 	switch len(x) {
 	case 1:
@@ -136,19 +139,23 @@ func div(x, y int) (float32, error) {
 }
 
 
+// ポインタ
 func pointerExample() {
 	x := 10
 	p := &x
 	fmt.Println(p, *p)
 
+	// 参照元の値を書き換え
 	*p = 20
 	fmt.Println(x)
 
+	// 値の再代入で参照側も変わる
 	x = 30
 	fmt.Println(*p)
 }
 
 
+// 構造体
 type Profile struct{
 	Name  string
 	Email string
@@ -160,6 +167,7 @@ type Square struct {
 	Height float64
 }
 
+// メソッド
 func(s Square) Area() float64 {
 	return s.Width * s.Height
 }
@@ -168,6 +176,7 @@ func (s Square) Diagonal() float64 {
 	return math.Sqrt(s.Width * s.Width + s.Height * s.Height)
 }
 
+// ユーザー定義型
 type Age int
 
 func (a Age) IsAdult() bool {
@@ -187,6 +196,7 @@ func (s Square) Double() {
 	s.Height *= 2
 }
 
+// 構造体のポインタ
 func (s *Square) Halve() {
 	s.Width /= 2
 	s.Height /= 2
@@ -195,7 +205,6 @@ func (s *Square) Halve() {
 func (s *Square) Swap() {
 	s.Width, s.Height = s.Height, s.Width
 }
-
 
 type Triangle struct {
 	Base   float64
@@ -206,6 +215,7 @@ func (t Triangle) Area() float64 {
 	return (t.Base * t.Height) / 2
 }
 
+// インターフェース
 type Polygon interface {
 	Area() float64
 }
@@ -222,8 +232,10 @@ func (c Circle) Area() float64 {
 	return c.Radius * c.Radius * 3.14
 }
 
+// error
 func errorHandlingExample() {
 
+	// Goの標準なエラーハンドリング
 	if _, err := strconv.Atoi("abc"); err != nil {
 		fmt.Println(err)
 	}
