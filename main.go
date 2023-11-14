@@ -3,6 +3,7 @@ package main
 import (
 	"schoo/Lesson1"
 	"schoo/Lesson2"
+	"schoo/Lesson3"
 )
 
 func main() {
@@ -12,6 +13,9 @@ func main() {
 
 	// 関数とメソッド
 	lesson2.Lesson2Main()
+
+	// 並行処理
+	lesson3.Lesson3Main()
 
 }
 
