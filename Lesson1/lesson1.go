@@ -73,8 +73,7 @@ func Lesson1Main() {
 		fmt.Println(i)
 	}
 
-
-	sum := 10;
+	sum := 10
 	// 「条件」のみのfor文
 	for sum < 1000 {
 		fmt.Println(sum)
@@ -150,9 +149,9 @@ func Lesson1Main() {
 
 	// マップ
 	m := map[string]int{
-		"佐藤":100,
-		"鈴木":90,
-		"田中":95,
+		"佐藤": 100,
+		"鈴木": 90,
+		"田中": 95,
 	}
 
 	// キーと値の取り出し

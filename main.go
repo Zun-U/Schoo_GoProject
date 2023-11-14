@@ -1,9 +1,9 @@
 package main
 
 import (
-	"schoo/Lesson1"
-	"schoo/Lesson2"
-	"schoo/Lesson3"
+	lesson1 "schoo/Lesson1"
+	lesson2 "schoo/Lesson2"
+	lesson3 "schoo/Lesson3"
 )
 
 func main() {

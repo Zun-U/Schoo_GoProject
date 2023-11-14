@@ -1,12 +1,12 @@
 package lesson2
 
 import (
-	"fmt"
 	"errors"
+	"fmt"
 	"math"
+	"net/url"
 	"os"
 	"strconv"
-	"net/url"
 )
 
 func Lesson2Main() {
@@ -30,21 +30,21 @@ func Lesson2Main() {
 	pointerExample()
 
 	me := Profile{
-		Name: "鈴木",
+		Name:  "鈴木",
 		Email: "test@example.com",
-		Age: 20,
+		Age:   20,
 	}
 
 	fmt.Println(me)
 	fmt.Println(me.Age)
 
 	a := Square{
-		Width: 4,
+		Width:  4,
 		Height: 3,
 	}
 
 	b := Square{
-		Width: 8,
+		Width:  8,
 		Height: 3,
 	}
 
@@ -52,13 +52,13 @@ func Lesson2Main() {
 
 	fmt.Println(a.Diagonal(), b.Diagonal())
 
-	var	e, f, g Age = 16, 18, 20
+	var e, f, g Age = 16, 18, 20
 	fmt.Println(e, e.IsAdult())
 	fmt.Println(f, f.IsAdult())
 	fmt.Println(g, g.IsAdult())
 
 	ss := Square{
-		Width: 20,
+		Width:  20,
 		Height: 40,
 	}
 	ss.Double()
@@ -70,12 +70,12 @@ func Lesson2Main() {
 	fmt.Println(ss)
 
 	o := Square{
-		Width: 2,
+		Width:  2,
 		Height: 3,
 	}
 
 	t := Triangle{
-		Base: 3,
+		Base:   3,
 		Height: 4,
 	}
 
@@ -103,7 +103,7 @@ func add(x int, y int) int {
 
 // 引数の型省略
 func sub(x, y int) int {
-	return x -y
+	return x - y
 }
 
 // 複数の戻り値
@@ -138,7 +138,6 @@ func div(x, y int) (float32, error) {
 	return float32(x) / float32(y), nil
 }
 
-
 // ポインタ
 func pointerExample() {
 	x := 10
@@ -154,9 +153,8 @@ func pointerExample() {
 	fmt.Println(*p)
 }
 
-
 // 構造体
-type Profile struct{
+type Profile struct {
 	Name  string
 	Email string
 	Age   int
@@ -168,12 +166,12 @@ type Square struct {
 }
 
 // メソッド
-func(s Square) Area() float64 {
+func (s Square) Area() float64 {
 	return s.Width * s.Height
 }
 
 func (s Square) Diagonal() float64 {
-	return math.Sqrt(s.Width * s.Width + s.Height * s.Height)
+	return math.Sqrt(s.Width*s.Width + s.Height*s.Height)
 }
 
 // ユーザー定義型
@@ -189,7 +187,6 @@ func (a Age) String() string {
 	}
 	return "未成年"
 }
-
 
 func (s Square) Double() {
 	s.Width *= 2

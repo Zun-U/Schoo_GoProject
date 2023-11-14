@@ -2,9 +2,9 @@ package lesson3
 
 import (
 	"fmt"
-	"time"
-	"strconv"
 	"math/rand"
+	"strconv"
+	"time"
 )
 
 func Lesson3Main() {
@@ -56,7 +56,7 @@ func Lesson3Main() {
 	}
 	close(ch3)
 
-	// パイプライン
+	// パイプライン ※処理を細かく分けて繋げる
 	rand.New(rand.NewSource(time.Now().UnixNano())) // シード値
 	nums := make([]int, 0, 10)
 	for i := 0; i < cap(nums); i++ {
@@ -85,7 +85,7 @@ func Lesson3Main() {
 	fmt.Print("\n")
 
 	fmt.Print("%= 7: ")
-	for x := range mod7(sq(convertChannel(nums))) {
+	for x := range mod7(halve(sq(convertChannel(nums)))) {
 		fmt.Printf("%2d ", x)
 	}
 	fmt.Print("\n")
@@ -101,15 +101,15 @@ func print5x(s string) {
 
 // channel
 func send(x int, ch chan int) {
-	ch <-x
+	ch <- x
 }
 
 // buffer
 func bufferChannel() {
 	ch := make(chan int, 3)
-	ch <-1
-	ch <-2
-	ch <-3 // 受信しない
+	ch <- 1
+	ch <- 2
+	ch <- 3 // 受信しない
 	fmt.Println(<-ch)
 	fmt.Println(<-ch)
 }
@@ -117,13 +117,13 @@ func bufferChannel() {
 // close
 func send3(x int, ch chan int) {
 	ch <- x
-	ch <- x*x
-	ch <- x*x*x
+	ch <- x * x
+	ch <- x * x * x
 	close(ch)
 }
 
 // select
-func gen (intCh chan int, stringCh chan string) {
+func gen(intCh chan int, stringCh chan string) {
 	intCh <- 1
 	stringCh <- "abc"
 	intCh <- 2
@@ -191,7 +191,7 @@ func parser(s <-chan string) (<-chan int, <-chan error) {
 	ch := make(chan int)
 	errCh := make(chan error)
 
-	go func(){
+	go func() {
 		for str := range s {
 			i, err := strconv.Atoi(str)
 			if err != nil {
@@ -209,18 +209,18 @@ func sq(in <-chan int) <-chan int {
 	out := make(chan int)
 	go func() {
 		for x := range in {
-			out <- x*x
+			out <- x * x
 		}
 		close(out)
 	}()
 	return out
 }
 
-func halve(in <- chan int) <-chan int {
+func halve(in <-chan int) <-chan int {
 	out := make(chan int)
 	go func() {
 		for x := range in {
-			out <- x /2
+			out <- x / 2
 		}
 		close(out)
 	}()
@@ -239,7 +239,7 @@ func convertChannel(nums []int) <-chan int {
 	return ch
 }
 
-func mod7(in <- chan int) <-chan int {
+func mod7(in <-chan int) <-chan int {
 	out := make(chan int)
 	go func() {
 		for x := range in {
