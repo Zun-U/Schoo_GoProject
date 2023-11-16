@@ -110,7 +110,7 @@ type responsParams struct {
 func setResponsParams() responsParams {
 	params := responsParams {
 		Title: "Go入門",
-		Lessons: responseStrings(),
+		Lessons: responseContents(),
 		Time: time.Now(),
 	}
 	return params
@@ -145,6 +145,19 @@ func templateExample() {
 	if err := http.ListenAndServe(":8080", nil); err != nil {
 		log.Fatal(err)
 	}
+
+}
+
+
+func responseContents() []string {
+
+	x := []string {
+		"入門編",
+		"応用編",
+		"実践編",
+	}
+
+	return x
 
 }
 

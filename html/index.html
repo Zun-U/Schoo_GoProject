@@ -7,14 +7,21 @@
 </head>
 <body>
     <main>
+
         <h1>{{ .Title }}</h1>
+
+        <ol>
         {{ range .Lessons }}
+            <li>{{ . }}</li> <!-- valueがここに入る -->
         {{ end }}
+        </ol>
+
         <h2>標準パッケージ</h2>
         <div>html/template</div>
+
         <h3>時刻</h3>
         <div>{{ .Time }}</div>
-        <div>{{ .Now.Format "2006/01/02 15:04" }} <!-- 月が1、日付が2、時刻が3、分が4、秒が5、年が6 -->
+
     </main>
 </body>
 </html>
