@@ -4,6 +4,7 @@ import (
 	lesson1 "schoo/Lesson1"
 	lesson2 "schoo/Lesson2"
 	lesson3 "schoo/Lesson3"
+	lesson4 "schoo/Lesson4"
 )
 
 func main() {
@@ -16,6 +17,9 @@ func main() {
 
 	// 並行処理
 	lesson3.Lesson3Main()
+
+	// GoのインストールとHTML
+	lesson4.Lesson4Main()
 
 }
 

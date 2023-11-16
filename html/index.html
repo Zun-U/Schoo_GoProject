@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schoo</title>
+</head>
+<body>
+    <main>
+        <h1>{{ .Title }}</h1>
+        {{ range .Lessons }}
+        {{ end }}
+        <h2>標準パッケージ</h2>
+        <div>html/template</div>
+        <h3>時刻</h3>
+        <div>{{ .Time }}</div>
+        <div>{{ .Now.Format "2006/01/02 15:04" }} <!-- 月が1、日付が2、時刻が3、分が4、秒が5、年が6 -->
+    </main>
+</body>
+</html>
