@@ -5,6 +5,7 @@ import (
 	lesson2 "schoo/Lesson2"
 	lesson3 "schoo/Lesson3"
 	lesson4 "schoo/Lesson4"
+	lesson5 "schoo/Lesson5"
 )
 
 func main() {
@@ -20,6 +21,9 @@ func main() {
 
 	// GoのインストールとHTML
 	lesson4.Lesson4Main()
+
+	// SQL
+	lesson5.Lesson5Main()
 
 }
 

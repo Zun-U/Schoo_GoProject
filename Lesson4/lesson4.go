@@ -7,7 +7,6 @@ import (
 	"net/http" // Goが提供する標準ライブラリ
 	"time"
 	// "os"
-	// "github.com/lib/pq"
 )
 
 func Lesson4Main() {
