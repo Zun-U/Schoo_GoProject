@@ -27,4 +27,20 @@ func TestHandler_Index(t *testing.T) {
 	if !strings.Contains(rec.Body.String(), "<h1>私のブログ</h1>") {
 		t.Fatal("タイトルがありません。")
 	}
+
+	// 記事一覧のテスト
+	titles := []string{
+		"自己紹介",
+		"こんなことがありました",
+		"仕事について",
+		"ブログ始めました",
+	}
+
+	for _, title := range titles {
+		if !strings.Contains(rec.Body.String(), fmt.Sprintf("<h2>%s</h2>", title)) {
+			t.Fatal("article title is missing", title)
+		}
+	}
+
+
 }

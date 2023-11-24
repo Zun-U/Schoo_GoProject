@@ -4,40 +4,52 @@
 # PLEASE DO NOT EDIT IT DIRECTLY.
 #
 
-FROM alpine:3.18
+FROM buildpack-deps:bookworm-scm
 
-RUN apk add --no-cache ca-certificates
+# install cgo-related dependencies
+RUN set -eux; \
+	apt-get update; \
+	apt-get install -y --no-install-recommends \
+		g++ \
+		gcc \
+		libc6-dev \
+		make \
+		pkg-config \
+	; \
+	rm -rf /var/lib/apt/lists/*
 
 ENV PATH /usr/local/go/bin:$PATH
 
 ENV GOLANG_VERSION 1.21.4
 
 RUN set -eux; \
-	apk add --no-cache --virtual .fetch-deps gnupg; \
-	arch="$(apk --print-arch)"; \
+	arch="$(dpkg --print-architecture)"; arch="${arch##*-}"; \
 	url=; \
 	case "$arch" in \
-		'x86_64') \
+		'amd64') \
 			url='https://dl.google.com/go/go1.21.4.linux-amd64.tar.gz'; \
 			sha256='73cac0215254d0c7d1241fa40837851f3b9a8a742d0b54714cbdfb3feaf8f0af'; \
+			;; \
+		'armel') \
+			export GOARCH='arm' GOARM='5' GOOS='linux'; \
 			;; \
 		'armhf') \
 			url='https://dl.google.com/go/go1.21.4.linux-armv6l.tar.gz'; \
 			sha256='6c62e89113750cc77c498194d13a03fadfda22bd2c7d44e8a826fd354db60252'; \
 			;; \
-		'armv7') \
-			url='https://dl.google.com/go/go1.21.4.linux-armv6l.tar.gz'; \
-			sha256='6c62e89113750cc77c498194d13a03fadfda22bd2c7d44e8a826fd354db60252'; \
-			;; \
-		'aarch64') \
+		'arm64') \
 			url='https://dl.google.com/go/go1.21.4.linux-arm64.tar.gz'; \
 			sha256='ce1983a7289856c3a918e1fd26d41e072cc39f928adfb11ba1896440849b95da'; \
 			;; \
-		'x86') \
+		'i386') \
 			url='https://dl.google.com/go/go1.21.4.linux-386.tar.gz'; \
 			sha256='64d3e5d295806e137c9e39d1e1f10b00a30fcd5c2f230d72b3298f579bb3c89a'; \
 			;; \
-		'ppc64le') \
+		'mips64el') \
+			url='https://dl.google.com/go/go1.21.4.linux-mips64le.tar.gz'; \
+			sha256='c7ce3a9dcf03322b79beda474c4a0154393d9029b48f7c2e260fb3365c8a6ad3'; \
+			;; \
+		'ppc64el') \
 			url='https://dl.google.com/go/go1.21.4.linux-ppc64le.tar.gz'; \
 			sha256='2c63b36d2adcfb22013102a2ee730f058ec2f93b9f27479793c80b2e3641783f'; \
 			;; \
@@ -63,7 +75,7 @@ RUN set -eux; \
 	fi; \
 	\
 	wget -O go.tgz.asc "$url.asc"; \
-	wget -O go.tgz "$url"; \
+	wget -O go.tgz "$url" --progress=dot:giga; \
 	echo "$sha256 *go.tgz" | sha256sum -c -; \
 	\
 # https://github.com/golang/go/issues/14739#issuecomment-324767697
@@ -80,12 +92,9 @@ RUN set -eux; \
 	rm go.tgz; \
 	\
 	if [ -n "$build" ]; then \
-		apk add --no-cache --virtual .build-deps \
-			bash \
-			gcc \
-			go \
-			musl-dev \
-		; \
+		savedAptMark="$(apt-mark showmanual)"; \
+		apt-get update; \
+		apt-get install -y --no-install-recommends golang-go; \
 		\
 		export GOCACHE='/tmp/gocache'; \
 		\
@@ -93,14 +102,13 @@ RUN set -eux; \
 			cd /usr/local/go/src; \
 # set GOROOT_BOOTSTRAP + GOHOST* such that we can build Go successfully
 			export GOROOT_BOOTSTRAP="$(go env GOROOT)" GOHOSTOS="$GOOS" GOHOSTARCH="$GOARCH"; \
-			if [ "${GOARCH:-}" = '386' ]; then \
-# https://github.com/golang/go/issues/52919; https://github.com/docker-library/golang/pull/426#issuecomment-1152623837
-				export CGO_CFLAGS='-fno-stack-protector'; \
-			fi; \
 			./make.bash; \
 		); \
 		\
-		apk del --no-network .build-deps; \
+		apt-mark auto '.*' > /dev/null; \
+		apt-mark manual $savedAptMark > /dev/null; \
+		apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
+		rm -rf /var/lib/apt/lists/*; \
 		\
 # remove a few intermediate / bootstrapping files the official binary release tarballs do not contain
 		rm -rf \
@@ -114,8 +122,6 @@ RUN set -eux; \
 		; \
 	fi; \
 	\
-	apk del --no-network .fetch-deps; \
-	\
 	go version
 
 # don't auto-upgrade the gotoolchain
@@ -125,11 +131,9 @@ ENV GOTOOLCHAIN=local
 ENV GOPATH /go
 ENV PATH $GOPATH/bin:$PATH
 RUN mkdir -p "$GOPATH/src" "$GOPATH/bin" && chmod -R 1777 "$GOPATH"
-
 WORKDIR $GOPATH
 
 # Install Formatter 2023/11/24
-# RUN wget -O- -nv https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s v1.55.2
 RUN go install golang.org/x/tools/cmd/goimports@latest
 RUN go install github.com/rakyll/hey@latest
 RUN go install honnef.co/go/tools/cmd/staticcheck@latest

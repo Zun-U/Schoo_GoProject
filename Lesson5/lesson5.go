@@ -23,16 +23,21 @@ func connectDB() *sql.DB {
 	}
 
 	c := mysql.Config{
-		DBName:    "db",
-		User:      "root",
+		DBName:    "sample",
+		User:      "gopher",
 		Passwd:    "password",
 		Addr:      "localhost:3306",
 		Net:       "tcp",
 		ParseTime: true,
-		Collation: "utf8mb4_general_ci",
+		Collation: "utf8mb4_unicode_ci",
 		Loc:       jst,
 	}
 
+
 	db, err := sql.Open("mysql", c.FormatDSN())
+
+	defer db.Close()
+
+	return db
 
 }
