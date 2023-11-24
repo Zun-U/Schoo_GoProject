@@ -1,29 +1,46 @@
 package main
 
 import (
-	lesson1 "schoo/Lesson1"
-	lesson2 "schoo/Lesson2"
-	lesson3 "schoo/Lesson3"
-	lesson4 "schoo/Lesson4"
-	lesson5 "schoo/Lesson5"
+	// lesson1 "schoo/Lesson1"
+	// lesson2 "schoo/Lesson2"
+	// lesson3 "schoo/Lesson3"
+	// lesson4 "schoo/Lesson4"
+	// lesson5 "schoo/Lesson5"
+
+	"html/template"
+	"net/http"
+	"schoo/article"
 )
 
 func main() {
 
 	// 変数、定数、制御構造、配列
-	lesson1.Lesson1Main()
+	// lesson1.Lesson1Main()
 
 	// 関数とメソッド
-	lesson2.Lesson2Main()
+	// lesson2.Lesson2Main()
 
 	// 並行処理
-	lesson3.Lesson3Main()
+	// lesson3.Lesson3Main()
 
 	// GoのインストールとHTML
-	lesson4.Lesson4Main()
+	// lesson4.Lesson4Main()
 
 	// SQL
-	lesson5.Lesson5Main()
+	// lesson5.Lesson5Main()
+
+	// 実践編
+	makeHtml()
+
+}
+
+func makeHtml() {
+
+	h := handler.New(template.Must(template.ParaseFiles("assets/index.html")))
+
+	http.HandleFunc("/", h.index)
+
+	http.ListenAndServe(":8080", nil)
 
 }
 

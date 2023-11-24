@@ -5,7 +5,7 @@ import (
 	"database/sql"
 	"time"
 
-	"github.com/go-sql-driver/mysql"
+	_ "github.com/go-sql-driver/mysql"
 )
 
 func Lesson5Main() {
@@ -23,7 +23,7 @@ func connectDB() (*sql.DB) {
 
 	c := mysql.Config{
 		DBName: "db",
-		User: "user",
+		User: "root",
 		Passwd: "password",
 		Addr: "localhost:3306",
 		Net: "tcp",
