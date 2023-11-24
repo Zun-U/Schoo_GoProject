@@ -1,10 +1,10 @@
-pakcage handler
+package handler
 
 import (
 	"net/http"
 )
 
-func (h *Handler) index(w http.responseWriter, r *http.Request) {
+func (h *Handler) index(w http.ResponseWriter, r *http.Request) {
 
 	// 無名構造体
 	params := struct {

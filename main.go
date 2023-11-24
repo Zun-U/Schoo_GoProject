@@ -6,10 +6,7 @@ import (
 	// lesson3 "schoo/Lesson3"
 	// lesson4 "schoo/Lesson4"
 	// lesson5 "schoo/Lesson5"
-
-	"html/template"
-	"net/http"
-	"schoo/article"
+	"schoo/sampleApp"
 )
 
 func main() {
@@ -30,19 +27,10 @@ func main() {
 	// lesson5.Lesson5Main()
 
 	// 実践編
-	makeHtml()
+	appmain.AppMain()
 
 }
 
-func makeHtml() {
-
-	h := handler.New(template.Must(template.ParaseFiles("sampleApp/assets/index.html")))
-
-	http.HandleFunc("/", h.index)
-
-	http.ListenAndServe(":8080", nil)
-
-}
 
 // アンチウィルスによってGoが実行できない場合
 //

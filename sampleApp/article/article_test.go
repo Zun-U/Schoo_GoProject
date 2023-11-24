@@ -1,31 +1,16 @@
 package article
 
 import (
-	"fmt"
 	"testing"
 )
 
-type Article struct {
-	Title string
-}
-
-func Titles() []Article {
-	return x := []Article {
-		{Title:"自己紹介"},
-		{Title:"こんなことがありました"},
-		{Title:"仕事について"},
-		{Title:"ブログ始めました"},
-	}
-}
-
-
-func TestGetAll() (t * testing.T) {
+func TestGetAll(t * testing.T) {
 
 	// テストしたい関数の呼び出し
-	got, err := GetAll(Titles())
+	got, err := GetAll()
 
 	// エラーハンドリング
-	if err != {
+	if err != nil {
 		t.Fatal("記事の取得に失敗しました:", err)
 	}
 
@@ -48,7 +33,7 @@ func testEq(t *testing.T, want, got string) {
 	t.Helper()
 
 	if want != got {
-		t.Fatalif("want: %v\ngot:  %v", want, got)
+		t.Fatalf("want: %v\ngot:  %v", want, got)
 	}
 
 }

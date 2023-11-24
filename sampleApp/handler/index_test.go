@@ -1,7 +1,9 @@
-pakcage handler
+package handler
 
 import (
 	"testing"
+	"html/template"
+	"net/http"
 )
 
 func TestHandler_Index(t *testing.T) {
@@ -20,7 +22,7 @@ func TestHandler_Index(t *testing.T) {
 	}
 
 	// トップページのタイトルのテスト
-	if !strings.Contains(rec.Body.String(),"<h1>私のブログ</h1>") {
+	if !Strings.Contains(rec.Body.String(),"<h1>私のブログ</h1>") {
 		t.Fatal("タイトルがありません。")
 	}
 }
