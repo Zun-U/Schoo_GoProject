@@ -1,10 +1,11 @@
 package lesson5
 
 import (
-	"fmt"
 	"database/sql"
+	"fmt"
 	"time"
 
+	"github.com/go-sql-driver/mysql"
 	_ "github.com/go-sql-driver/mysql"
 )
 
@@ -13,7 +14,7 @@ func Lesson5Main() {
 
 }
 
-func connectDB() (*sql.DB) {
+func connectDB() *sql.DB {
 
 	jst, err := time.LoadLocation("Asia/Tokyo")
 
@@ -22,20 +23,16 @@ func connectDB() (*sql.DB) {
 	}
 
 	c := mysql.Config{
-		DBName: "db",
-		User: "root",
-		Passwd: "password",
-		Addr: "localhost:3306",
-		Net: "tcp",
+		DBName:    "db",
+		User:      "root",
+		Passwd:    "password",
+		Addr:      "localhost:3306",
+		Net:       "tcp",
 		ParseTime: true,
 		Collation: "utf8mb4_general_ci",
-		Loc: jst,
+		Loc:       jst,
 	}
 
 	db, err := sql.Open("mysql", c.FormatDSN())
 
 }
-
-
-
-

@@ -9,7 +9,7 @@ type Handler struct {
 }
 
 func New(templateIndex *template.Template) *Handler {
-	return &Handler {
+	return &Handler{
 		templateIndex: templateIndex,
 	}
 }

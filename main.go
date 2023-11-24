@@ -6,7 +6,7 @@ import (
 	// lesson3 "schoo/Lesson3"
 	// lesson4 "schoo/Lesson4"
 	// lesson5 "schoo/Lesson5"
-	"schoo/sampleApp"
+	appmain "schoo/sampleApp"
 )
 
 func main() {
@@ -30,7 +30,6 @@ func main() {
 	appmain.AppMain()
 
 }
-
 
 // アンチウィルスによってGoが実行できない場合
 //

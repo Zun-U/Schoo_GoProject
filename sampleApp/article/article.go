@@ -11,12 +11,11 @@ func GetAll() ([]Article, error) {
 	return x, nil
 }
 
-
 func Titles() []Article {
-	return []Article {
-		{Title:"自己紹介"},
-		{Title:"こんなことがありました"},
-		{Title:"仕事について"},
-		{Title:"ブログ始めました"},
+	return []Article{
+		{Title: "自己紹介"},
+		{Title: "こんなことがありました"},
+		{Title: "仕事について"},
+		{Title: "ブログ始めました"},
 	}
 }

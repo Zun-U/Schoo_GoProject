@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func TestGetAll(t * testing.T) {
+func TestGetAll(t *testing.T) {
 
 	// テストしたい関数の呼び出し
 	got, err := GetAll()
@@ -24,7 +24,6 @@ func TestGetAll(t * testing.T) {
 	testEq(t, "ブログ始めました", got[3].Title)
 
 }
-
 
 // 中身を確認するヘルパー関数の作成
 func testEq(t *testing.T, want, got string) {

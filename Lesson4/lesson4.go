@@ -57,16 +57,16 @@ func httpExample() {
 		fmt.Fprintf(w, "Time: %v\n", time.Now())     // 現在時刻
 	})
 
-	http.HandleFunc("/lessons", func(w http.ResponseWriter, r *http.Request){
+	http.HandleFunc("/lessons", func(w http.ResponseWriter, r *http.Request) {
 		for _, v := range x {
 			fmt.Fprintf(w, v)
-				// 「http://localhost:8080/lessons」にアクセスすると以下が表示される
-				// ------------------------------------------------------------
-				// Go入門
-				// 1.入門編
-				// 2.応用編
-				// 3.実践編
-				// ------------------------------------------------------------
+			// 「http://localhost:8080/lessons」にアクセスすると以下が表示される
+			// ------------------------------------------------------------
+			// Go入門
+			// 1.入門編
+			// 2.応用編
+			// 3.実践編
+			// ------------------------------------------------------------
 		}
 	})
 
@@ -86,7 +86,7 @@ func httpExample() {
 
 func responseStrings() []string {
 
-	x := []string {
+	x := []string{
 		"<h1>Go入門</h1>",
 		"<ol>",
 		"<li>入門編</li>",
@@ -99,18 +99,17 @@ func responseStrings() []string {
 
 }
 
-
 type responsParams struct {
-	Title 	string
+	Title   string
 	Lessons []string
 	Time    time.Time // time.Time型
 }
 
 func setResponsParams() responsParams {
-	params := responsParams {
-		Title: "Go入門",
+	params := responsParams{
+		Title:   "Go入門",
 		Lessons: responseContents(),
-		Time: time.Now(),
+		Time:    time.Now(),
 	}
 	return params
 }
@@ -134,11 +133,11 @@ func templateExample() {
 
 	params := setResponsParams()
 
-	http.HandleFunc("/html", func(w http.ResponseWriter, r *http.Request){
-			t.Execute(w, params)
-			// for _, v := range params.Lessons {
-			// 	t.Execute(w, v)
-			// }
+	http.HandleFunc("/html", func(w http.ResponseWriter, r *http.Request) {
+		t.Execute(w, params)
+		// for _, v := range params.Lessons {
+		// 	t.Execute(w, v)
+		// }
 	})
 
 	if err := http.ListenAndServe(":8080", nil); err != nil {
@@ -147,10 +146,9 @@ func templateExample() {
 
 }
 
-
 func responseContents() []string {
 
-	x := []string {
+	x := []string{
 		"入門編",
 		"応用編",
 		"実践編",
@@ -159,4 +157,3 @@ func responseContents() []string {
 	return x
 
 }
-
