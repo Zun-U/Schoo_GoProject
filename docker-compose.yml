@@ -8,7 +8,8 @@ services:
     stdin_open: true
     tty: true
     volumes:
-      - .:/go/src
+      # - .:/go/src
+      - .:/Schoo_GoProject
     ports:
       - 8181:8181
     depends_on:

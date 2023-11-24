@@ -36,7 +36,7 @@ func main() {
 
 func makeHtml() {
 
-	h := handler.New(template.Must(template.ParaseFiles("assets/index.html")))
+	h := handler.New(template.Must(template.ParaseFiles("sampleApp/assets/index.html")))
 
 	http.HandleFunc("/", h.index)
 
