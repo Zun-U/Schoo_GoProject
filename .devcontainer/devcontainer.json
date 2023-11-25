@@ -1,0 +1,16 @@
+{
+  "name": "Go",
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+			"settings": {},
+			"extensions": [
+				"golang.go",
+        "shardulm94.trailing-spaces"
+			]
+		}
+	},
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "go",
+	"workspaceFolder": "/go/src"
+}
