@@ -6,6 +6,7 @@ import (
 	"net/http/httptest"
 	"strings"
 	"testing"
+	"fmt"
 )
 
 func TestHandler_Index(t *testing.T) {

@@ -138,3 +138,4 @@ RUN go install golang.org/x/tools/cmd/goimports@latest
 RUN	go install github.com/rakyll/hey@latest
 RUN	go install honnef.co/go/tools/cmd/staticcheck@latest
 RUN	go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+RUN go install golang.org/x/tools/gopls@latest
