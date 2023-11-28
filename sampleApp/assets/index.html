@@ -11,11 +11,13 @@
 <body>
     <h1>{{ .Title }}</h1>
 
-    {{ range .Articles }}
-        <li>
-            <h2>{{ .Title }}</h2>
-        </li>
-    {{ end }}
+    <ul>
+        {{ range .Articles }}
+            <li>
+                <h2>{{ .Title }}</h2>
+            </li>
+        {{ end }}
+    </ul>
 
 </body>
 

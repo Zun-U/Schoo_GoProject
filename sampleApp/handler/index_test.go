@@ -39,7 +39,7 @@ func TestHandler_Index(t *testing.T) {
 
 	for _, title := range titles {
 		if !strings.Contains(rec.Body.String(), fmt.Sprintf("<h2>%s</h2>", title)) {
-			t.Fatal("article title is missing", title)
+			t.Fatal("記事のタイトルがありません", title)
 		}
 	}
 

@@ -1,6 +1,7 @@
 package article
 
 import (
+	"strconv"
 	"testing"
 )
 
@@ -35,4 +36,34 @@ func testEq(t *testing.T, want, got string) {
 		t.Fatalf("want: %v\ngot:  %v", want, got)
 	}
 
+}
+
+func testGet(t *testing.T) {
+	for i := 1; i <= 4; i++ {
+		t.Run(strconv.Itoa(i), func(t *testing.T){
+			got, err := Get(i)
+			if err != nil {
+				t.Fatal("記事の取得に失敗しました:", err)
+			}
+			if got == nil {
+				t.Fatal("gotがnilです")
+			}
+			if got.Title == "" {
+				t.Fatal("タイトルが空です")
+			}
+			if got.Content == "" {
+				t.Fatal("中身が空です")
+			}
+		})
+	}
+
+	t.Run("not found", func(t *testing.T){
+		got, err := Get(-1)
+		if err == nil {
+			t.Fatal("エラーがnilです")
+		}
+		if got == nil {
+			t.Fatal("gotがnilです")
+		}
+	})
 }
