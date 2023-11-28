@@ -10,7 +10,7 @@ Go言語学習
 |Lesson3 |並行処理|
 |Lesson4 |GoのインストールとHTML|
 |Lesson5 |SQL|
-|Lesson6 |実践編その1(前)|
+|Lesson6 |テスト駆動開発|
 |Lesson7 |`学習途中`|
 |Lesson8 |`未学習`|
 |Lesson9 |`未学習`|
