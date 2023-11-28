@@ -5,11 +5,13 @@ import (
 )
 
 type Handler struct {
-	templateIndex *template.Template
+	templateIndex   *template.Template
+	templateArticle *template.Template
 }
 
-func New(templateIndex *template.Template) *Handler {
+func New(templateIndex, templateArticle *template.Template) *Handler {
 	return &Handler{
-		templateIndex: templateIndex,
+		templateIndex:   templateIndex,
+		templateArticle: templateArticle,
 	}
 }

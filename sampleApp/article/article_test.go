@@ -24,6 +24,7 @@ func TestGetAll(t *testing.T) {
 	testEq(t, "仕事について", got[2].Title)
 	testEq(t, "ブログ始めました", got[3].Title)
 
+
 }
 
 // 中身を確認するヘルパー関数の作成
@@ -38,8 +39,8 @@ func testEq(t *testing.T, want, got string) {
 
 }
 
-func testGet(t *testing.T) {
-	for i := 1; i <= 4; i++ {
+func TestGet(t *testing.T) {
+	for i := 1; i < 4; i++ {
 		t.Run(strconv.Itoa(i), func(t *testing.T){
 			got, err := Get(i)
 			if err != nil {

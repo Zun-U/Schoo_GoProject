@@ -2,7 +2,6 @@ package article
 
 import (
 	"fmt"
-	"schoo/sampleApp/article"
 )
 
 type Article struct {
@@ -12,22 +11,25 @@ type Article struct {
 }
 
 func Get(id int) (*Article, error) {
+
+	articles := articleContent()
+
 	for _, v := range articles {
 		if v.ID == id {
 			return &v, nil
 		}
 	}
-	return nil, fmt.Errorf("記事が見つかりません: %d:", id)
+	return nil, fmt.Errorf("記事が見つかりません: id: %d", id)
 }
 
 func GetAll() ([]Article, error) {
 
-	x := Titles()
+	x := articleContent()
 
 	return x, nil
 }
 
-func Titles() []Article {
+func articleContent() []Article {
 	return []Article{
 		{
 			ID: 4,
