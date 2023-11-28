@@ -19,16 +19,22 @@ Go言語学習
 
 >### 環境構築
 
-ローカル環境汚染を最低限にするために、Dockerにて開発環境を構築しました。
+ローカル環境汚染を最低限にするために、Dockerにて開発環境を構築しました。<br>
 git cloneを行うと、そのまま使えるようになっています。
+
+<br>
 
 > [!WARNING]
 > 環境はWindowsでVSCodeの利用を想定しています。
 
-[手順]
+<br>
+
+### 手順
 - Docker Desktopを起動します。
-- git cloneしたソースコード上でVSCodeを起動します。
-- VSCodeのコマンドDev Containers:Reopen in ContainerでDockerを起動します。
+- `git clone` したソースコード上でVSCodeを起動します。
+- VSCodeのコマンド `Dev Containers:Reopen in Container` でDockerを起動します。
+
+<br>
 
 > [!NOTE]
-> VSCodeの拡張機能の「Remote Development」を事前にインストールする必要があります。
+> VSCodeの拡張機能の `Remote Development`を事前にインストールする必要があります。
