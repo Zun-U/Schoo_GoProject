@@ -22,8 +22,16 @@ Go言語学習
 >### 環境構築
 
 ローカル環境汚染を最低限にするために、Dockerにて開発環境を構築しました。<br>
-Go言語の補完機能やフォーマッターなどが準備されています。<br>
+Go言語の実行環境や、VSCodeによる補完機能やフォーマッターなどが準備されています。<br>
 git cloneを行うと、そのまま使えるようになっています。
+- Go 1.21.4
+- VScodeの拡張機能
+  - Go
+    - goimports
+    - staticcheck
+    - golangci-lint
+    - gopls
+  - trailing-spaces
 
 > [!WARNING]
 > 環境はWindowsでVSCodeの利用を想定しています。
