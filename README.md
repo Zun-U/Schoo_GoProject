@@ -28,8 +28,6 @@ git cloneを行うと、そのまま使えるようになっています。
 > [!WARNING]
 > 環境はWindowsでVSCodeの利用を想定しています。
 
-<br>
-
 -------------
 
 ### 構築手順
@@ -41,3 +39,5 @@ git cloneを行うと、そのまま使えるようになっています。
 
 > [!NOTE]
 > VSCodeの拡張機能の `Remote Development`を事前にインストールする必要があります。
+
+<br>
