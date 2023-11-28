@@ -30,7 +30,7 @@ git cloneを行うと、そのまま使えるようになっています。
 
 -------------
 
-### 構築手順
+>### 構築手順
 - Docker Desktopを起動します。
 - `git clone` したソースコード上でVSCodeを起動します。
 - VSCodeのコマンド `Dev Containers:Reopen in Container` でDockerを起動します。
