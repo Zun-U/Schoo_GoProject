@@ -28,13 +28,14 @@ git cloneを行うと、そのまま使えるようになっています。
 - VScodeの拡張機能
   - Go
     - goimports
+    - hey
     - staticcheck
     - golangci-lint
     - gopls
   - trailing-spaces
 
-> [!WARNING]
-> 環境はLinux(Ubuntu)でVSCodeの利用を想定しています。
+> [!NOTE]
+> 実行環境はLinux(Ubuntu)で、VSCodeの利用を想定しています。
 
 -------------
 
