@@ -34,7 +34,7 @@ git cloneを行うと、そのまま使えるようになっています。
   - trailing-spaces
 
 > [!WARNING]
-> 環境はWindowsでVSCodeの利用を想定しています。
+> 環境はLinux(Ubuntu)でVSCodeの利用を想定しています。
 
 -------------
 
