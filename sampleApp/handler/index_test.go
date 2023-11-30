@@ -11,7 +11,7 @@ import (
 
 func TestHandler_Index(t *testing.T) {
 	tm := template.Must(template.ParseFiles("../assets/index.html"))
-	h := New(tm)
+	h := New(tm, nil)
 
 	// Topページ(/)を取得(Get)
 	req := httptest.NewRequest(http.MethodGet, "/", nil)

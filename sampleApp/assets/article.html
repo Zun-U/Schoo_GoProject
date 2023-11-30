@@ -1,12 +1,22 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ .Article.Title }}|{{ .Title }}</title>
 </head>
+
 <body>
+
+    <a href="/">
+        <h1>{{ .Title }}</h1>
+    </a>
+
     <h2>{{ .Article.Title }}</h2>
+
     <p>{{ .Article.Content }}</p>
+
 </body>
+
 </html>

@@ -13,9 +13,11 @@
 
     <ul>
         {{ range .Articles }}
+        <a href="/articles?id={{ .ID }}">
             <li>
                 <h2>{{ .Title }}</h2>
             </li>
+        </a>
         {{ end }}
     </ul>
 
