@@ -11,8 +11,8 @@ Go言語学習
 |Lesson4 |GoのインストールとHTML|
 |Lesson5 |SQL|
 |Lesson6 |テスト駆動開発|
-|Lesson7 |`学習途中`|
-|Lesson8 |`未学習`|
+|Lesson7 |テーブル駆動テスト|
+|Lesson8 |`学習途中`|
 |Lesson9 |`未学習`|
 |Lesson10|`未学習`|
 
