@@ -1,14 +1,21 @@
 package article
 
 import (
+	"schoo/sampleApp/test"
 	"strconv"
 	"testing"
 )
 
 func TestGetAll(t *testing.T) {
 
+	testDb := test.DB(t)
+
+	defer test.Close(t, testDb)
+
+	s := New(testDb)
+
 	// テストしたい関数の呼び出し
-	got, err := GetAll()
+	got, err := s.GetAll()
 
 	// エラーハンドリング
 	if err != nil {
@@ -19,30 +26,36 @@ func TestGetAll(t *testing.T) {
 		t.Fatal("記事数が4ではありません異なります:", len(got))
 	}
 
-	testEq(t, "自己紹介", got[0].Title)
-	testEq(t, "こんなことがありました", got[1].Title)
-	testEq(t, "仕事について", got[2].Title)
-	testEq(t, "ブログ始めました", got[3].Title)
-
+	test.Eq(t, "自己紹介", got[0].Title)
+	test.Eq(t, "こんなことがありました", got[1].Title)
+	test.Eq(t, "仕事について", got[2].Title)
+	test.Eq(t, "ブログ始めました", got[3].Title)
 
 }
 
 // 中身を確認するヘルパー関数の作成
-func testEq(t *testing.T, want, got string) {
-
-	// 関数の呼び出し時にエラーを検知するための関数
-	t.Helper()
-
-	if want != got {
-		t.Fatalf("want: %v\ngot:  %v", want, got)
-	}
-
-}
+// func testEq(t *testing.T, want, got string) {
+//
+// 	// 関数の呼び出し時にエラーを検知するための関数
+// 	t.Helper()
+//
+// 	if want != got {
+// 		t.Fatalf("want: %v\ngot:  %v", want, got)
+// 	}
+//
+// }
 
 func TestGet(t *testing.T) {
+
+	testDb := test.DB(t)
+
+	defer test.Close(t, testDb)
+
+	s := New(testDb)
+
 	for i := 1; i < 4; i++ {
-		t.Run(strconv.Itoa(i), func(t *testing.T){
-			got, err := Get(i)
+		t.Run(strconv.Itoa(i), func(t *testing.T) {
+			got, err := s.Get(i)
 			if err != nil {
 				t.Fatal("記事の取得に失敗しました:", err)
 			}
@@ -58,8 +71,8 @@ func TestGet(t *testing.T) {
 		})
 	}
 
-	t.Run("not found", func(t *testing.T){
-		got, err := Get(-1)
+	t.Run("not found", func(t *testing.T) {
+		got, err := s.Get(-1)
 		if err == nil {
 			t.Fatal("エラーがnilです")
 		}

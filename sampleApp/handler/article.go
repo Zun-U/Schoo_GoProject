@@ -29,7 +29,7 @@ func (h *Handler) Article(w http.ResponseWriter, req *http.Request) {
 	}
 
 	params := ArticleContent{
-		Title:"私のブログ",
+		Title:   "私のブログ",
 		Article: a,
 	}
 

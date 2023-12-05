@@ -25,6 +25,7 @@ Go言語学習
 Go言語の実行環境や、VSCodeによる補完機能やフォーマッターなどが準備されています。<br>
 git cloneを行うと、そのまま使えるようになっています。
 - Go 1.21.4
+- MySQL 8.0
 - VScodeの拡張機能
   - Go
     - goimports

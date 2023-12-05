@@ -18,10 +18,10 @@ func (h *Handler) Index(w http.ResponseWriter, r *http.Request) {
 
 	// 無名構造体
 	params := struct {
-		Title 	string
+		Title    string
 		Articles []article.Article
 	}{
-		Title: "私のブログ",
+		Title:    "私のブログ",
 		Articles: articles,
 	}
 

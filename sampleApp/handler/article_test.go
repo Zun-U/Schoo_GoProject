@@ -8,7 +8,6 @@ import (
 	"testing"
 )
 
-
 type testTable struct {
 	Name string
 	ID   string
@@ -16,29 +15,29 @@ type testTable struct {
 }
 
 // テーブル駆動テスト
-func TestArticle(t *testing.T){
+func TestArticle(t *testing.T) {
 
 	// テーブル
 	tests := []testTable{
 		{
-			Name:"success",
-			ID:  "1",
-			Want:http.StatusOK,
+			Name: "success",
+			ID:   "1",
+			Want: http.StatusOK,
 		},
 		{
 			Name: "bad request",
-			ID: "abc",
+			ID:   "abc",
 			Want: http.StatusBadRequest,
 		},
 		{
 			Name: "not found",
-			ID: "-1",
+			ID:   "-1",
 			Want: http.StatusNotFound,
 		},
 	}
 
 	for _, tt := range tests {
-		t.Run(tt.Name, func (t *testing.T)  {
+		t.Run(tt.Name, func(t *testing.T) {
 			tm := template.Must(template.ParseFiles("../assets/article.html"))
 			h := New(nil, tm)
 
@@ -52,12 +51,12 @@ func TestArticle(t *testing.T){
 
 			if rec.Code == http.StatusOK {
 				// 記事のタイトルチェック
-				if !strings.Contains(rec.Body.String(),"<h2>") {
+				if !strings.Contains(rec.Body.String(), "<h2>") {
 					t.Fatal("記事のタイトルがありません")
 				}
 
 				// 記事の中身チェック
-				if !strings.Contains(rec.Body.String(),"<p>") {
+				if !strings.Contains(rec.Body.String(), "<p>") {
 					t.Fatal("記事の内容がありません")
 				}
 			}

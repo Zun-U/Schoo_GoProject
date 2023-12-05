@@ -1,12 +1,12 @@
 package handler
 
 import (
+	"fmt"
 	"html/template"
 	"net/http"
 	"net/http/httptest"
 	"strings"
 	"testing"
-	"fmt"
 )
 
 func TestHandler_Index(t *testing.T) {
@@ -42,6 +42,5 @@ func TestHandler_Index(t *testing.T) {
 			t.Fatal("記事のタイトルがありません", title)
 		}
 	}
-
 
 }

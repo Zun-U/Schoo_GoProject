@@ -33,7 +33,6 @@ func connectDB() *sql.DB {
 		Loc:       jst,
 	}
 
-
 	db, err := sql.Open("mysql", c.FormatDSN())
 
 	defer db.Close()
