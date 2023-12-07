@@ -22,7 +22,7 @@ func (h *Handler) Article(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	a, err := article.Get(id)
+	a, err := h.article.Get(id)
 	if err != nil {
 		log.Printf("記事の取得に失敗しました: %d", err)
 		w.WriteHeader(http.StatusNotFound)

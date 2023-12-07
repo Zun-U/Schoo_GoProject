@@ -3,6 +3,7 @@ package article
 import (
 	"database/sql"
 	"fmt"
+
 	"time"
 )
 
@@ -25,10 +26,10 @@ func New(db *sql.DB) *Service {
 
 func (s *Service) GetAll() ([]Article, error) {
 
-	rows, err := s.db.Query("SELECT * FROM article BY id DESC LIMIT 100;")
+	rows, err := s.db.Query("SELECT * FROM article_test ORDER BY id DESC LIMIT 100;")
 
 	if err != nil {
-		return nil, fmt.Errorf("クエリが失敗しました: w", err)
+		return nil, fmt.Errorf("クエリが失敗しました: %w", err)
 	}
 
 	defer rows.Close()
@@ -54,11 +55,32 @@ func (s *Service) GetAll() ([]Article, error) {
 	return articles, nil
 }
 
-func (s *Service) Get() ([]Article, error) {
+func (s *Service) Get(id int) (*Article, error) {
 
-	x := articleContent()
+	// MySQLでプレイスホルダーを使用したい場合は、プリペアードステートメントを使用するを使用する
+	stmt, err := s.db.Prepare("SELECT * FROM article_test WHERE id = ?")
+	if err != nil {
+		return nil, fmt.Errorf("SQLの作成に失敗しました: %w", err)
+	}
+	defer stmt.Close()
 
-	return x, nil
+	var article Article
+
+	err = stmt.QueryRow(id).Scan(&article.ID, &article.Title, &article.Content, &article.Created)
+
+	if err != nil {
+		if err == sql.ErrNoRows {
+			return nil, fmt.Errorf("結果が１行も帰りませんでした: %w", err)
+		}
+		return nil, fmt.Errorf("スキャン失敗しました: %w", err)
+	}
+
+	// if err := rows.Err(); err != nil {
+	// 	return nil, err
+	// }
+
+	return &article, nil
+
 }
 
 // func articleContent() []Article {

@@ -2,7 +2,6 @@ package handler
 
 import (
 	"fmt"
-	"html/template"
 	"net/http"
 	"net/http/httptest"
 	"strings"
@@ -10,8 +9,9 @@ import (
 )
 
 func TestHandler_Index(t *testing.T) {
-	tm := template.Must(template.ParseFiles("../assets/index.html"))
-	h := New(tm, nil)
+
+	h, close := newHandler(t)
+	defer close()
 
 	// Topページ(/)を取得(Get)
 	req := httptest.NewRequest(http.MethodGet, "/", nil)
@@ -34,7 +34,7 @@ func TestHandler_Index(t *testing.T) {
 		"自己紹介",
 		"こんなことがありました",
 		"仕事について",
-		"ブログ始めました",
+		"ブログはじめました",
 	}
 
 	for _, title := range titles {

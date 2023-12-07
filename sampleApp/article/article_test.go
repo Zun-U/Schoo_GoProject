@@ -1,6 +1,7 @@
 package article
 
 import (
+	// "fmt"
 	"schoo/sampleApp/test"
 	"strconv"
 	"testing"
@@ -8,11 +9,11 @@ import (
 
 func TestGetAll(t *testing.T) {
 
-	testDb := test.DB(t)
+	testdb := test.DB(t)
 
-	defer test.Close(t, testDb)
+	defer test.Close(t, testdb)
 
-	s := New(testDb)
+	s := New(testdb)
 
 	// テストしたい関数の呼び出し
 	got, err := s.GetAll()
@@ -29,7 +30,7 @@ func TestGetAll(t *testing.T) {
 	test.Eq(t, "自己紹介", got[0].Title)
 	test.Eq(t, "こんなことがありました", got[1].Title)
 	test.Eq(t, "仕事について", got[2].Title)
-	test.Eq(t, "ブログ始めました", got[3].Title)
+	test.Eq(t, "ブログはじめました", got[3].Title)
 
 }
 
@@ -47,13 +48,13 @@ func TestGetAll(t *testing.T) {
 
 func TestGet(t *testing.T) {
 
-	testDb := test.DB(t)
+	testdb := test.DB(t)
 
-	defer test.Close(t, testDb)
+	defer test.Close(t, testdb)
 
-	s := New(testDb)
+	s := New(testdb)
 
-	for i := 1; i < 4; i++ {
+	for i := 1; i < 5; i++ {
 		t.Run(strconv.Itoa(i), func(t *testing.T) {
 			got, err := s.Get(i)
 			if err != nil {

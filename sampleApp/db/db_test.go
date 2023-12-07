@@ -8,6 +8,13 @@ import (
 	// "database/sql"
 )
 
+// testのキャッシュクリア
+//
+// ********************
+// go clean -testcache
+// ********************
+
+
 func TestNew(t *testing.T) {
 
 	jst, err := time.LoadLocation("Asia/Tokyo")

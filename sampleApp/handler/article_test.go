@@ -1,7 +1,6 @@
 package handler
 
 import (
-	"html/template"
 	"net/http"
 	"net/http/httptest"
 	"strings"
@@ -36,11 +35,11 @@ func TestArticle(t *testing.T) {
 		},
 	}
 
+	h, close := newHandler(t)
+	defer close()
+
 	for _, tt := range tests {
 		t.Run(tt.Name, func(t *testing.T) {
-			tm := template.Must(template.ParseFiles("../assets/article.html"))
-			h := New(nil, tm)
-
 			req := httptest.NewRequest(http.MethodGet, "/articles?id="+tt.ID, nil)
 			rec := httptest.NewRecorder()
 			h.Article(rec, req)
