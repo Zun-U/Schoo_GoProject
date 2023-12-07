@@ -12,7 +12,7 @@ Go言語学習
 |Lesson5 |SQL|
 |Lesson6 |テスト駆動開発|
 |Lesson7 |テーブル駆動テスト|
-|Lesson8 |`学習途中`|
+|Lesson8 |テスト用ヘルパー関数、DB接続テスト|
 |Lesson9 |`未学習`|
 |Lesson10|`未学習`|
 
