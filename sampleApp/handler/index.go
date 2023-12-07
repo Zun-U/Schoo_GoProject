@@ -8,7 +8,7 @@ import (
 
 func (h *Handler) Index(w http.ResponseWriter, r *http.Request) {
 
-	articles, err := h.article.GetAll()
+	articles, err := h.article.GetAll(TableName)
 
 	if err != nil {
 		log.Println("記事一覧の取得に失敗しました")

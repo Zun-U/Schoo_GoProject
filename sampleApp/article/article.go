@@ -24,9 +24,9 @@ func New(db *sql.DB) *Service {
 	}
 }
 
-func (s *Service) GetAll() ([]Article, error) {
+func (s *Service) GetAll(table string) ([]Article, error) {
 
-	rows, err := s.db.Query("SELECT * FROM article_test ORDER BY id DESC LIMIT 100;")
+	rows, err := s.db.Query("SELECT * FROM " + table + " ORDER BY id DESC LIMIT 100;")
 
 	if err != nil {
 		return nil, fmt.Errorf("クエリが失敗しました: %w", err)
@@ -55,10 +55,10 @@ func (s *Service) GetAll() ([]Article, error) {
 	return articles, nil
 }
 
-func (s *Service) Get(id int) (*Article, error) {
+func (s *Service) Get(table string, id int) (*Article, error) {
 
-	// MySQLでプレイスホルダーを使用したい場合は、プリペアードステートメントを使用するを使用する
-	stmt, err := s.db.Prepare("SELECT * FROM article_test WHERE id = ?")
+	// MySQLでプレイスホルダーを使用したい場合は、プリペアードステートメントを使用するを使用することもできる
+	stmt, err := s.db.Prepare("SELECT * FROM " + table + " WHERE id = ?")
 	if err != nil {
 		return nil, fmt.Errorf("SQLの作成に失敗しました: %w", err)
 	}
@@ -70,7 +70,7 @@ func (s *Service) Get(id int) (*Article, error) {
 
 	if err != nil {
 		if err == sql.ErrNoRows {
-			return nil, fmt.Errorf("結果が１行も帰りませんでした: %w", err)
+			return nil, fmt.Errorf("結果行が存在しません: %w", err)
 		}
 		return nil, fmt.Errorf("スキャン失敗しました: %w", err)
 	}
@@ -80,6 +80,52 @@ func (s *Service) Get(id int) (*Article, error) {
 	// }
 
 	return &article, nil
+
+}
+
+func (s *Service) Create(table, title, content string) (int, error) {
+
+	stmt, err := s.db.Prepare("INSERT INTO " + table + " (title, content, created) VALUES(?, ?, now())")
+	if err != nil {
+		return 0, fmt.Errorf("SQLの作成に失敗しました: %w", err)
+	}
+	// defer stmt.Close()
+
+	var id int
+
+	result, err := stmt.Exec(title, content)
+
+	if err != nil {
+		if err == sql.ErrNoRows {
+			return 0, fmt.Errorf("クエリに失敗しました: %w", err)
+		}
+		return 0, fmt.Errorf("スキャンに失敗しました: %w", err)
+	}
+
+	i, err := result.LastInsertId()
+	if err != nil {
+		fmt.Println(i)
+		return 0, fmt.Errorf("インサートに失敗しました1: %w", err)
+	}
+	fmt.Printf("LastInsertId： %d\n", id)
+
+	num, err := result.RowsAffected()
+	if err != nil {
+		fmt.Println(num)
+		return 0, fmt.Errorf("インサートに失敗しました2: %w", err)
+	}
+
+	// if err := row.Scan(&id); err != nil {
+	// 	return 0, fmt.Errorf("インサートに失敗しました1: %w", err)
+	// }
+
+	// if err := row.Err(); err != nil {
+	// 	return 0, fmt.Errorf("インサートに失敗しました2: %w", err)
+	// }
+
+	id = int(num)
+
+	return id, nil
 
 }
 
