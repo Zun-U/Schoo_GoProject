@@ -6,15 +6,17 @@ import (
 )
 
 type Handler struct {
-	templateIndex   *template.Template
-	templateArticle *template.Template
-	article         *article.Service
+	templateIndex      *template.Template
+	templateArticle    *template.Template
+	templateNewArticle *template.Template
+	article            *article.Service
 }
 
-func New(templateIndex, templateArticle *template.Template, article *article.Service) *Handler {
+func New(templateIndex, templateArticle, templateNewArticle *template.Template, article *article.Service) *Handler {
 	return &Handler{
-		templateIndex:   templateIndex,
-		templateArticle: templateArticle,
-		article:         article,
+		templateIndex:      templateIndex,
+		templateArticle:    templateArticle,
+		templateNewArticle: templateNewArticle,
+		article:            article,
 	}
 }

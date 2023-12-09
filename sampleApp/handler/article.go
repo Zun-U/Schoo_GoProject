@@ -38,3 +38,17 @@ func (h *Handler) Article(w http.ResponseWriter, req *http.Request) {
 	h.templateArticle.Execute(w, params)
 
 }
+
+type title struct {
+	Title string
+}
+
+func (h *Handler) NewArticle(w http.ResponseWriter, r *http.Request) {
+
+	params := title{
+		Title: "わたしのブログ",
+	}
+
+	h.templateNewArticle.Execute(w, params)
+
+}

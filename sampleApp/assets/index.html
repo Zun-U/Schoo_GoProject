@@ -11,6 +11,8 @@
 <body>
     <h1>{{ .Title }}</h1>
 
+    <a href="/articles/new">日記を書く</a>
+
     <ul>
         {{ range .Articles }}
         <a href="/articles?id={{ .ID }}">

@@ -63,3 +63,30 @@ func TestArticle(t *testing.T) {
 	}
 
 }
+
+func TestNewArticle(t *testing.T) {
+
+	h, close := newHandler(t)
+	defer close()
+
+	req := httptest.NewRequest(http.MethodGet, "/articles/new", nil)
+	rec := httptest.NewRecorder()
+	h.NewArticle(rec, req)
+
+	if rec.Code != http.StatusOK {
+		t.Fatal("status code is not 200:", rec.Code)
+	}
+
+	if !strings.Contains(rec.Body.String(), "<h1>わたしのブログ</h1>") {
+		t.Fatal("タイトルがありません")
+	}
+
+	if !strings.Contains(rec.Body.String(), "<h2>新規作成</h2>") {
+		t.Fatal("サブタイトルがありません")
+	}
+
+	if !strings.Contains(rec.Body.String(), `<form action="/articles" method="post">`) {
+		t.Fatal("フォームがありません")
+	}
+
+}

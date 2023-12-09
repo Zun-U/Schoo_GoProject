@@ -18,6 +18,7 @@ func newHandler(t *testing.T) (*Handler, func() error) {
 	h := New(
 		template.Must(template.ParseFiles("../assets/index.html")),
 		template.Must(template.ParseFiles("../assets/article.html")),
+		template.Must(template.ParseFiles("../assets/new.html")),
 		a,
 	)
 
