@@ -98,13 +98,16 @@ func TestCreateArticle(t *testing.T) {
 		t.Fatal("failed to create article:", err)
 	}
 
+	// idのテスト
 	test.Eq(t, 1, id)
 
+	// 作成した記事を取得
 	got, err := s.Get(TestTableName, id)
 	if err != nil {
 		t.Fatal("failed to get article:", err)
 	}
 
+	// Createに渡した内容通りか確認
 	test.Eq(t, "サンプルタイトル", got.Title)
 	test.Eq(t, "これはテスト用サンプルテキストです", got.Content)
 

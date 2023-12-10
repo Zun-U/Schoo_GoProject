@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>新規作成 | {{ .Title }}</title>
 </head>
+
 <body>
-    <h1>{{ .Title }}</h1>
-    <h2>新規作成</h2>
+  <h1>{{ .Title }}</h1>
+  <h2>新規作成</h2>
 
-    <form action="/articles" method="post">
+  <form action="/articles" method="post">
 
-      <label for="title">タイトル</label>
-      <input type="text" id="title" name="title"><br>
+    <label for="title">タイトル</label>
+    <input type="text" id="title" name="title"><br>
 
-      <label for="content">内容</label>
-      <textarea id="content" name="content"><br>
+    <label for="content">内容</label>
+    <textarea id="content" name="content"></textarea><br>
 
       <input type="submit" value="投稿する" onclick="return window.confirm('投稿してよろしいですか？')"><br>
 

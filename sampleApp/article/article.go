@@ -89,7 +89,7 @@ func (s *Service) Create(table, title, content string) (int, error) {
 	if err != nil {
 		return 0, fmt.Errorf("SQLの作成に失敗しました: %w", err)
 	}
-	// defer stmt.Close()
+	defer stmt.Close()
 
 	var id int
 
@@ -123,7 +123,7 @@ func (s *Service) Create(table, title, content string) (int, error) {
 	// 	return 0, fmt.Errorf("インサートに失敗しました2: %w", err)
 	// }
 
-	id = int(num)
+	id = int(i)
 
 	return id, nil
 

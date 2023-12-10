@@ -3,6 +3,8 @@ package handler
 import (
 	"net/http"
 	"net/http/httptest"
+	"net/url"
+	"schoo/sampleApp/test"
 	"strings"
 	"testing"
 )
@@ -14,7 +16,7 @@ type testTable struct {
 }
 
 // テーブル駆動テスト
-func TestArticle(t *testing.T) {
+func TestGetArticle(t *testing.T) {
 
 	// テーブル
 	tests := []testTable{
@@ -88,5 +90,76 @@ func TestNewArticle(t *testing.T) {
 	if !strings.Contains(rec.Body.String(), `<form action="/articles" method="post">`) {
 		t.Fatal("フォームがありません")
 	}
+
+}
+
+// テーブル駆動テスト用のテストテーブル構造体
+type createAritcleTestTable struct {
+	name    string
+	title   string
+	content string
+	want    int
+}
+
+func TestCreateArticle(t *testing.T) {
+
+	h, close := newHandler(t)
+	defer close()
+
+	// テスト用の値を作成(カラムの許容数を「title => 100」「content => 1000」にしておくこと)
+	tooLongTitle   := strings.Repeat("あ", 101)
+	tooLongContent := strings.Repeat("い", 1001)
+	validTitle     := strings.Repeat("う", 100)
+	validContent   := strings.Repeat("え", 1000)
+
+	// テーブル作成
+	tests := []createAritcleTestTable{
+		{
+			name: "too long title",
+			title: tooLongTitle,
+			content: validContent,
+			want: http.StatusBadRequest,
+		},
+		{
+			name: "too long content",
+			title: validTitle,
+			content: tooLongContent,
+			want: http.StatusBadRequest,
+		},
+		{
+			name: "success",
+			title: validTitle,
+			content: validContent,
+			want: http.StatusSeeOther,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T){
+			// リクエストボディ
+			form := url.Values {
+				"title":   {tt.title},
+				"content": {tt.content},
+			}
+			body := strings.NewReader(form.Encode())
+
+			// リクエストの作成
+			req := httptest.NewRequest(http.MethodPost, "/articles", body)
+			req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
+
+			// 実行
+			rec := httptest.NewRecorder()
+			h.Article(rec, req)
+
+			// ステータスコードのテスト
+			test.Eq(t, tt.want, rec.Code)
+
+			// レスポンスのテスト
+			if tt.want == http.StatusSeeOther {
+				test.Eq(t, "/articles?id=1", rec.Header().Get("Location"))
+			}
+		})
+	}
+
 
 }
