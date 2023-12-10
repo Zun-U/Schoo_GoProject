@@ -62,6 +62,8 @@ func (h *Handler) Article(w http.ResponseWriter, r *http.Request) {
 		h.getArticle(w, r)
 	case http.MethodPost:
 		h.createArticle(w, r)
+	case http.MethodDelete:
+		h.deleteArticle(w, r)
 	default:
 		w.WriteHeader(http.StatusMethodNotAllowed)
 	}
@@ -139,4 +141,25 @@ func validate(title, content string) error {
 	}
 
 	return nil
+}
+
+func (h *Handler) deleteArticle(w http.ResponseWriter, r *http.Request) {
+
+	queryID := r.URL.Query().Get("id")
+
+	id, err := strconv.Atoi(queryID)
+	if err != nil {
+		log.Println("failed to parse query:", queryID, err)
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
+	if err := h.article.Delete(id); err != nil {
+		log.Println("failed to delete article:", err)
+		w.WriteHeader(http.StatusNoContent)
+		return
+	}
+
+	w.WriteHeader(http.StatusNoContent)
+
 }

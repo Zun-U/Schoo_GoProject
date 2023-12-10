@@ -161,5 +161,49 @@ func TestCreateArticle(t *testing.T) {
 		})
 	}
 
+}
+
+
+type deleteArticleTestTable struct {
+	name string
+	id   string
+	want int
+}
+
+func TestDeleteArticle(t *testing.T) {
+
+	tests := []deleteArticleTestTable{
+		{
+			name: "success",
+			id: "1",
+			want: http.StatusNoContent,
+		},
+		{
+			name: "bad request",
+			id: "abc",
+			want: http.StatusBadRequest,
+		},
+		{
+			name: "do nothing",
+			id: "-1",
+			want: http.StatusNoContent,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+
+			h, close := newHandler(t)
+			defer close()
+
+			req := httptest.NewRequest(http.MethodDelete, "/articles?id=" + tt.id, nil)
+			rec := httptest.NewRecorder()
+
+			h.Article(rec, req)
+
+			test.Eq(t, tt.want, rec.Code)
+
+		})
+	}
 
 }

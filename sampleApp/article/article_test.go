@@ -112,3 +112,26 @@ func TestCreateArticle(t *testing.T) {
 	test.Eq(t, "これはテスト用サンプルテキストです", got.Content)
 
 }
+
+func TestDelete(t *testing.T) {
+
+	testdb := test.DB(t)
+	defer test.Close(t, testdb)
+
+	s := New(testdb)
+
+	err := s.Delete(1)
+	if err != nil {
+		t.Fatal("failed to create article:", err)
+	}
+
+	// articleを取得
+	got, err := s.GetAll(TestTableName)
+	if err != nil {
+		t.Fatal("failed to get article:", err)
+	}
+
+	// 数が減っていればOK
+	test.Eq(t, 4, len(got))
+
+}

@@ -17,30 +17,35 @@
 
     <p>{{ .Article.Content }}</p>
 
-    <button type="submit" onclick="deleteArticle.init('{{ .Article.ID }}')"></button>
+    <button type="submit" onclick="deleteArticle.init('{{ .Article.ID }}')">この投稿を削除する</button>
 
     <script>
+
         const deleteArticle = {
 
-            init: function (id) {
+            init: function(id) {
+                console.log(id);
                 this.alartDel();
                 this.delRequest(id);
                 this.redirectTop();
             },
 
-            alartDel: function () {
-                if (!window.confirm('本当に削除しますか')) {
+            alartDel: function() {
+                if (!window.confirm('本当に削除しますか')){
                     return;
                 }
             },
 
-            delRequest: function () {
-                fetch('/articles?id=${id}', { method: 'DELETE' });
+            delRequest: function(id) {
+                console.log(id)
+                fetch(`/articles?id=${id}`, {method: 'DELETE'});
             },
 
-            redirectTop: function () {
+            redirectTop: function() {
                 location.href = '/';
             },
+
+
 
         }
     </script>
