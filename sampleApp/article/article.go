@@ -129,9 +129,9 @@ func (s *Service) Create(table, title, content string) (int, error) {
 
 }
 
-func (s *Service) Delete(id int) error {
+func (s *Service) Delete(table string, id int) error {
 
-	_, err := s.db.Exec("DELETE FROM article WHERE id = ?", id)
+	_, err := s.db.Exec(`DELETE FROM `+table+` WHERE id = ?`, id)
 
 	if err != nil {
 		return fmt.Errorf("削除に失敗しました: %w", err)

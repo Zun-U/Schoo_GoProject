@@ -25,7 +25,7 @@ func TestHandler_Index(t *testing.T) {
 	}
 
 	// トップページのタイトルのテスト
-	if !strings.Contains(rec.Body.String(), "<h1>私のブログ</h1>") {
+	if !strings.Contains(rec.Body.String(), "<h1>わたしのブログ</h1>") {
 		t.Fatal("タイトルがありません。")
 	}
 

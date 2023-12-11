@@ -120,7 +120,7 @@ func TestDelete(t *testing.T) {
 
 	s := New(testdb)
 
-	err := s.Delete(1)
+	err := s.Delete(TestTableName, 1)
 	if err != nil {
 		t.Fatal("failed to create article:", err)
 	}

@@ -154,7 +154,7 @@ func (h *Handler) deleteArticle(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if err := h.article.Delete(id); err != nil {
+	if err := h.article.Delete(TableName, id); err != nil {
 		log.Println("failed to delete article:", err)
 		w.WriteHeader(http.StatusNoContent)
 		return

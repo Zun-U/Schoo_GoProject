@@ -21,7 +21,7 @@ func (h *Handler) Index(w http.ResponseWriter, r *http.Request) {
 		Title    string
 		Articles []article.Article
 	}{
-		Title:    "私のブログ",
+		Title:    "わたしのブログ",
 		Articles: articles,
 	}
 
