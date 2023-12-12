@@ -10,8 +10,10 @@ import (
 )
 
 type ArticleContent struct {
-	Title   string
-	Article *article.Article
+	ID         int
+	Title      string
+	Paragraphs []string
+	Created    time.Time
 }
 
 const TableName = "article_test"
@@ -88,8 +90,9 @@ func (h *Handler) getArticle(w http.ResponseWriter, r *http.Request) {
 	}
 
 	params := ArticleContent{
+		ID; a.ID,
 		Title:   "わたしのブログ",
-		Article: a,
+		Article: a.,
 	}
 
 	h.templateArticle.Execute(w, params)
