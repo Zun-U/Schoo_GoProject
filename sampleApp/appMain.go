@@ -1,9 +1,11 @@
 package appmain
 
 import (
+	"embed"
 	"html/template"
 	"log"
 	"net/http"
+
 	// "os"
 	"schoo/sampleApp/article"
 	"schoo/sampleApp/db"
@@ -12,6 +14,15 @@ import (
 
 	"github.com/go-sql-driver/mysql"
 )
+
+// ====================
+// ビルド実行時にHTMLファイルも一緒にバイナリ形式にコンパイルする
+// (コメント行も必要)
+
+//go:embed assets
+var assets embed.FS
+
+// ====================
 
 func AppMain() {
 
@@ -39,9 +50,12 @@ func AppMain() {
 	a := article.New(d)
 
 	h := handler.New(
-		template.Must(template.ParseFiles("sampleApp/assets/index.html")),
-		template.Must(template.ParseFiles("sampleApp/assets/article.html")),
-		template.Must(template.ParseFiles("sampleApp/assets/new.html")),
+		// template.Must(template.ParseFiles("sampleApp/assets/index.html")),
+		// template.Must(template.ParseFiles("sampleApp/assets/article.html")),
+		// template.Must(template.ParseFiles("sampleApp/assets/new.html")),
+		template.Must(template.ParseFS(assets, "assets/index.html")),    // HTMLファイルをビルドファイルに含める為、「ParseFS」
+		template.Must(template.ParseFS(assets, "assets/article.html")),  // HTMLファイルをビルドファイルに含める為、「ParseFS」
+		template.Must(template.ParseFS(assets, "assets/new.html")),      // HTMLファイルをビルドファイルに含める為、「ParseFS」
 		a,
 	)
 

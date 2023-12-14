@@ -4,8 +4,9 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"schoo/sampleApp/article"
 	"strconv"
+	"strings"
+	"time"
 	"unicode/utf8"
 )
 
@@ -16,7 +17,7 @@ type ArticleContent struct {
 	Created    time.Time
 }
 
-const TableName = "article_test"
+const TableName = "article"
 
 // func (h *Handler) Article(w http.ResponseWriter, req *http.Request) {
 // 	queryID := req.URL.Query().Get("id")
@@ -89,10 +90,17 @@ func (h *Handler) getArticle(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusNotFound)
 	}
 
-	params := ArticleContent{
-		ID; a.ID,
-		Title:   "わたしのブログ",
-		Article: a.,
+	params := struct{
+		Title string
+		Article ArticleContent
+	}{
+		Title: "わたしのブログ",
+		Article: ArticleContent{
+			ID: a.ID,
+			Title: a.Title,
+			Paragraphs: strings.Split(a.Content, "\n"),
+			Created: a.Created,
+		},
 	}
 
 	h.templateArticle.Execute(w, params)

@@ -9,6 +9,8 @@ import (
 	"github.com/go-sql-driver/mysql"
 )
 
+const TableName = "article"
+
 func DB(t *testing.T) *sql.DB {
 
 	t.Helper()
@@ -37,18 +39,18 @@ func DB(t *testing.T) *sql.DB {
 
 	Clear(t, d)
 
-	// _, err = d.Exec(`
-	// 	INSERT INTO article_test (id, title, content, created)
-	// 	VALUES
-	// 	 	(1, 'ブログはじめました', 'このブログではわたしの個人的な事柄について書くつもりです。', now()),
-	// 		(2, '仕事について', 'わたしは新卒のころからずっと続けている仕事があります。', now()),
-	// 		(3, 'こんなことがありました', '先日、散歩をしていた時に変な出来事に遭遇しました。', now()),
-	// 		(4, '自己紹介', 'わたしの自己紹介をさせてください。', now())
-	// `)
+	_, err = d.Exec(`
+		INSERT INTO ` + TableName + ` (id, title, content, created)
+		VALUES
+		 	(1, 'ブログはじめました', 'このブログではわたしの個人的な事柄について書くつもりです。', now()),
+			(2, '仕事について', 'わたしは新卒のころからずっと続けている仕事があります。', now()),
+			(3, 'こんなことがありました', '先日、散歩をしていた時に変な出来事に遭遇しました。', now()),
+			(4, '自己紹介', 'わたしの自己紹介をさせてください。', now())
+	`)
 
-	// if err != nil {
-	// 	t.Fatal(err)
-	// }
+	if err != nil {
+		t.Fatal(err)
+	}
 
 	return d
 
@@ -56,10 +58,10 @@ func DB(t *testing.T) *sql.DB {
 
 func Clear(t *testing.T, db *sql.DB) {
 	t.Helper()
-	if _, err := db.Exec("TRUNCATE TABLE article_test;"); err != nil {
+	if _, err := db.Exec("TRUNCATE TABLE "+ TableName +";"); err != nil {
 		t.Fatal(err)
 	}
-	if _, err := db.Exec("ALTER TABLE article_test AUTO_INCREMENT = 1;"); err != nil {
+	if _, err := db.Exec("ALTER TABLE " + TableName + " AUTO_INCREMENT = 1;"); err != nil {
 		t.Fatal(err)
 	}
 }

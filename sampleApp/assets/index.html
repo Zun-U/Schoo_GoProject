@@ -15,7 +15,7 @@
     <div class="container">
         <header class="d-flex justify-content-md-between align-items-center py-2 border-bottom">
             <a href="/" class="btn">
-                <h1>{{ .Title }}</h1>
+                <h1 class="fs-2">{{ .Title }}</h1>
             </a>
             <div class="text-end">
                 <a href="/articles/new" class="btn btn-outline-primary">
@@ -25,12 +25,12 @@
         </header>
 
         <div class="py-3 list-group list-group-flush">
-            {{ range .Articles }}
+            {{ range .Summaries }}
             <a href="/articles?id={{ .ID }}" class="text-start list-group-item list-group-item-action py-4"
                 style="width: 100%;">
-                <small class="text-primary">
-                    <h2>{{ .Title }}</h2>
-                </small>
+                <small class="text-primary">{{ .Created.Format "2006/1/2" }}</small>
+                <h2>{{ .Title }}</h2>
+                <small class="text-secondary">{{ .Summary }}</small>
             </a>
             {{ end }}
         </div>

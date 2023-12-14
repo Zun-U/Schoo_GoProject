@@ -107,7 +107,7 @@ func (s *Service) Create(table, title, content string) (int, error) {
 		fmt.Println(i)
 		return 0, fmt.Errorf("インサートに失敗しました1: %w", err)
 	}
-	fmt.Printf("LastInsertId： %d\n", id)
+	// fmt.Printf("LastInsertId： %d\n", id)
 
 	num, err := result.RowsAffected()
 	if err != nil {

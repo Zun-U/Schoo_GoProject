@@ -11,6 +11,9 @@
 -- ログイン
 -- mysql -u $MYSQL_USER -p$MYSQL_PASSWORD $MYSQL_DATABASE
 
+-- ローカルホストのオーナーを変更(bash, terminal)
+-- chown -R root:root ./
+
 -- テーブル作成
 CREATE TABLE article (id INTEGER AUTO_INCREMENT PRIMARY KEY NOT NULL,title VARCHAR(100) NOT NULL,content VARCHAR(1000) NOT NULL,created DATE NOT NULL);
 
